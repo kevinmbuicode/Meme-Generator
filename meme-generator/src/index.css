@@ -41,6 +41,8 @@ code {
 }
 .hero-container > div > input {
   margin: 8px;
+  font-family: 'Inter', sans-serif;
+  text-indent: 5px;
 }
 .hero-btn {
   background-color: #672280;
@@ -49,4 +51,5 @@ code {
   width: 300px;
   border-color: #672280;
   height: 30px;
+  font-family: 'Inter', sans-serif;
 }
