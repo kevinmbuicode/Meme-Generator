@@ -5,12 +5,14 @@ import Meme from './memeData'
 
 
 const Hero = () => {
+    const [memeImage, setMemeImage] = React.useState("")
 
     const handleClick = () => {
         const memesArray = Meme.data.meme
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
-        console.log(url);
+        console.log(url)
+        setMemeImage(url)
     }
  
     return(
@@ -26,6 +28,8 @@ const Hero = () => {
             alt='img' 
             height='12' width='12'
             /></button>
+            <p>Click the button above</p>
+            <img align='right' src={`${memeImage}`} alt="meme_image" height="250px" width="350px"/>
         </div>
     )
 }

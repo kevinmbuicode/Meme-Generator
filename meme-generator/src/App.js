@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 //import Meme from './components/memeData'
 
 function App() {
+
   return (
     <div className="App">
       <NavBar/>
