@@ -5,9 +5,9 @@ import Meme from './memeData'
 
 
 const Hero = () => {
-    const [memeImage, setMemeImage] = React.useState("")
+    const [memeImage, setMemeImage] = React.useState("https://static.toiimg.com/photo/74674393.cms")
 
-    const handleClick = () => {
+    const getMemeImage = () => {
         const memesArray = Meme.data.meme
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
@@ -18,11 +18,11 @@ const Hero = () => {
     return(
         <div className="hero-container">
             <div>
-                <input type='text' placeholder='Top Text'/>
+                <input type='text'  placeholder='Top Text'/>
                 <input type='text' placeholder='Bottom Text'/>
             </div>
             <button className='hero-btn'
-            onClick={handleClick}
+            onClick={getMemeImage}
             >Get a new meme image 
             <img src={button_image} 
             alt='img' 
