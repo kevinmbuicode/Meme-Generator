@@ -11,7 +11,6 @@ const Hero = () => {
         const memesArray = Meme.data.meme
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
-        console.log(url)
         setMemeImage(url)
     }
  
