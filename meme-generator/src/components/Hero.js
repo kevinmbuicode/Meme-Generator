@@ -6,6 +6,11 @@ import Meme from './memeData'
 
 const Hero = () => {
     const [memeImage, setMemeImage] = React.useState("https://static.toiimg.com/photo/74674393.cms")
+    //Top text, bottom text in state
+    const [meme, setMeme] = React.useState({
+        topText: "",
+        bottomText: ""
+    })
 
     const getMemeImage = () => {
         const memesArray = Meme.data.meme
@@ -13,12 +18,34 @@ const Hero = () => {
         const url = memesArray[randomNumber].url
         setMemeImage(url)
     }
+
+    //topText bottomText event handler
+    const handleChange = (event) => {
+        event.preventDefault()
+        const {name, value} = event.target
+        setMeme(prevMeme => {
+            return {
+                ...prevMeme,
+                [name]: value
+            }
+        })
+    }
  
     return(
         <div className="hero-container">
             <div>
-                <input type='text'  placeholder='Top Text'/>
-                <input type='text' placeholder='Bottom Text'/>
+                <input type='text'  
+                placeholder='Top Text'
+                onChange={handleChange}
+                name='topText'
+                value={meme.topText}
+                />
+                <input type='text' 
+                placeholder='Bottom Text'
+                    value={meme.bottomText}
+                    onChange={handleChange}
+                    name="bottomText"
+                />
             </div>
             <button className='hero-btn'
             onClick={getMemeImage}
@@ -28,7 +55,11 @@ const Hero = () => {
             height='12' width='12'
             /></button>
             <p>Click the button above</p>
-            <img align='right' src={`${memeImage}`} alt="meme_image" height="250px" width="350px"/>
+            <div className='meme'>
+                <img align='right' src={`${memeImage}`} alt="meme_image" height="250px" width="350px"/>
+                <h2 className='meme-text-top'>{meme.topText}</h2>
+                <h2 className='meme-text-bottom'>{meme.bottomText}</h2>
+            </div>
         </div>
     )
 }

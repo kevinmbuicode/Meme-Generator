@@ -53,3 +53,21 @@ code {
   height: 30px;
   font-family: 'Inter', sans-serif;
 }
+.meme {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.meme-text-top{
+  position: absolute;
+  color: orangered;
+  margin-top: 60px;
+  margin-left: 25px;
+}
+.meme-text-bottom{
+  position: absolute;
+  color: aqua;
+  margin-top: 210px;
+  margin-left: 25px;
+}
+
