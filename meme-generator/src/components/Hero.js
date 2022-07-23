@@ -1,11 +1,12 @@
 import React from 'react';
 import button_image from './images/button-icon.png';
-import Meme from './memeData'
+//import Meme from './memeData'
 
 
 
 const Hero = () => {
-    const [memeImage, setMemeImage] = React.useState("https://static.toiimg.com/photo/74674393.cms")
+    const [memeImage, setMemeImage] = React.useState("https://static.toiimg.com/photo/74674393.cms")   
+    const [allMemes, SetAllMemes] = React.useState('')
     //Top text, bottom text in state
     const [meme, setMeme] = React.useState({
         topText: "",
@@ -13,11 +14,19 @@ const Hero = () => {
     })
 
     const getMemeImage = () => {
-        const memesArray = Meme.data.meme
+        const meme_url = ("https://api.imgflip.com/get_memes")
+        const memesArray = meme_url.data.meme
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
         setMemeImage(url)
     }
+
+    React.useEffect(()=> {
+        console.log("image fetch occured")
+        fetch("https://api.imgflip.com/get_memes")
+        .then(res => res.json())
+        .then(data => SetAllMemes(data))
+    }, [memeImage])
 
     //topText bottomText event handler
     const handleChange = (event) => {
