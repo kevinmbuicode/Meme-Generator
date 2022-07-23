@@ -1,6 +1,6 @@
 import React from 'react';
 import button_image from './images/button-icon.png';
-//import Meme from './memeData'
+import Meme from './memeData'
 
 
 
@@ -13,9 +13,8 @@ const Hero = () => {
         bottomText: ""
     })
 
-    const getMemeImage = () => {
-        const meme_url = ("https://api.imgflip.com/get_memes")
-        const memesArray = meme_url.data.meme
+    const getMemeImage = () => {   
+        const memesArray = Meme.data.meme
         const randomNumber = Math.floor(Math.random() * memesArray.length)
         const url = memesArray[randomNumber].url
         setMemeImage(url)
@@ -26,7 +25,7 @@ const Hero = () => {
         fetch("https://api.imgflip.com/get_memes")
         .then(res => res.json())
         .then(data => SetAllMemes(data))
-    }, [memeImage])
+    }, [memeImage])//dependency highlight
 
     //topText bottomText event handler
     const handleChange = (event) => {
