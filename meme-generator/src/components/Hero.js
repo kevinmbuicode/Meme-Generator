@@ -10,12 +10,25 @@ const Hero = () => {
         randomImage: "https://static.toiimg.com/photo/74674393.cms"
     })
 
+    //useEffect with async await
     React.useEffect(()=> {
-        console.log("Fetch occured")
-        fetch("https://api.imgflip.com/get_memes")
-        .then(res => res.json())
-        .then(data => setAllMemes(data.data.memes))
+        async function getMemes() {
+            const res = await fetch("https://api.imgflip.com/get_memes")
+            const data = await res.json()
+            setAllMemes(data.data.memes)
+        }
+        //call async function to run the function
+        getMemes()
+        //no clean up, we don't really need it
     }, [])
+
+    //useEffect with fetch
+    // React.useEffect(()=> {
+    //     console.log("Fetch occured")
+    //     fetch("https://api.imgflip.com/get_memes")
+    //     .then(res => res.json())
+    //     .then(data => setAllMemes(data.data.memes))
+    // }, [])
 
     function getMemeImage() {
         const randomNumber = Math.floor(Math.random() * allMemes.length)
