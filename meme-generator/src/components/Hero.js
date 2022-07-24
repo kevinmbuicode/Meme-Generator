@@ -1,33 +1,31 @@
 import React from 'react';
 import button_image from './images/button-icon.png';
-import Meme from './memeData'
-
 
 
 const Hero = () => {
-    const [memeImage, setMemeImage] = React.useState("https://static.toiimg.com/photo/74674393.cms")   
-    const [allMemes, SetAllMemes] = React.useState('')
-    //Top text, bottom text in state
+    const [allMemes, setAllMemes] = React.useState([])
     const [meme, setMeme] = React.useState({
         topText: "",
-        bottomText: ""
+        bottomText: "",
+        randomImage: "https://static.toiimg.com/photo/74674393.cms"
     })
 
-    const getMemeImage = () => {   
-        const memesArray = Meme.data.meme
-        const randomNumber = Math.floor(Math.random() * memesArray.length)
-        const url = memesArray[randomNumber].url
-        setMemeImage(url)
-    }
-
     React.useEffect(()=> {
-        console.log("image fetch occured")
+        console.log("Fetch occured")
         fetch("https://api.imgflip.com/get_memes")
         .then(res => res.json())
-        .then(data => SetAllMemes(data))
-    }, [memeImage])//dependency highlight
+        .then(data => setAllMemes(data.data.memes))
+    }, [])
 
-    //topText bottomText event handler
+    function getMemeImage() {
+        const randomNumber = Math.floor(Math.random() * allMemes.length)
+        const url = allMemes[randomNumber].url
+        setMeme(prevMeme => ({
+            ...prevMeme,
+            randomImage: url
+        }))
+    }
+
     const handleChange = (event) => {
         event.preventDefault()
         const {name, value} = event.target
@@ -38,7 +36,7 @@ const Hero = () => {
             }
         })
     }
- 
+
     return(
         <div className="hero-container">
             <div>
@@ -64,7 +62,7 @@ const Hero = () => {
             /></button>
             <p>Click the button above</p>
             <div className='meme'>
-                <img align='right' src={`${memeImage}`} alt="meme_image" height="250px" width="350px"/>
+                <img align='right' src={`${allMemes}`} alt="meme_image" height="250px" width="350px"/>
                 <h2 className='meme-text-top'>{meme.topText}</h2>
                 <h2 className='meme-text-bottom'>{meme.bottomText}</h2>
             </div>
@@ -72,4 +70,4 @@ const Hero = () => {
     )
 }
 
-export default Hero
+export default Hero;
