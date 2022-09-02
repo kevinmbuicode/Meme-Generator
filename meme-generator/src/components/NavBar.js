@@ -7,7 +7,7 @@ function NavBar() {
             <div className="navbar-info">
                 <img src={meme_icon} alt= "meme_icon" className='meme-icon-image' height='30px' weight='30px'/>
                 <p>Meme Generator</p>
-                <p>React Course - Project 3</p>
+                <p>React States and API use</p>
             </div>
         </div>
      );

@@ -1,26 +1,28 @@
 import React from 'react';
 import button_image from './images/button-icon.png';
+import Meme from './memeData'
 
 
 const Hero = () => {
-    const [allMemes, setAllMemes] = React.useState([])
-    const [meme, setMeme] = React.useState({
-        topText: "",
-        bottomText: "",
-        randomImage: "https://static.toiimg.com/photo/74674393.cms"
-    })
+    const [meme, setMeme] = React.useState("https://static.toiimg.com/photo/74674393.cms")
+    // const [allMemes, setAllMemes] = React.useState('https://static.toiimg.com/photo/74674393.cms')
+    // const [meme, setMeme] = React.useState({
+    //     topText: "",
+    //     bottomText: "",
+    //     // randomImage: "https://static.toiimg.com/photo/74674393.cms"
+    // })
 
     //useEffect with async await
-    React.useEffect(()=> {
-        async function getMemes() {
-            const res = await fetch("https://api.imgflip.com/get_memes")
-            const data = await res.json()
-            setAllMemes(data.data.memes)
-        }
-        //call async function to run the function
-        getMemes()
-        //no clean up, we don't really need it
-    }, [])
+    // React.useEffect(()=> {
+    //     async function getMemes() {
+    //         const res = await fetch("https://api.imgflip.com/get_memes")
+    //         const data = await res.json()
+    //         setAllMemes(data.data.memes)
+    //     }
+    //     //call async function to run the function
+    //     getMemes()
+    //     //no clean up, we don't really need it
+    // }, [])
 
     //useEffect with fetch
     // React.useEffect(()=> {
@@ -31,12 +33,10 @@ const Hero = () => {
     // }, [])
 
     function getMemeImage() {
-        const randomNumber = Math.floor(Math.random() * allMemes.length)
-        const url = allMemes[randomNumber].url
-        setMeme(prevMeme => ({
-            ...prevMeme,
-            randomImage: url
-        }))
+        const MemesArray = Meme.data.meme
+        const randomNumber = Math.floor(Math.random() * MemesArray.length)
+        const url = MemesArray[randomNumber].url
+        setMeme(url)
     }
 
     const handleChange = (event) => {
@@ -75,7 +75,7 @@ const Hero = () => {
             /></button>
             <p>Click the button above</p>
             <div className='meme'>
-                <img align='right' src={`${allMemes}`} alt="meme_image" height="250px" width="350px"/>
+                <img align='right' src={`${meme}`} alt="meme_image" height="250px" width="350px"/>
                 <h2 className='meme-text-top'>{meme.topText}</h2>
                 <h2 className='meme-text-bottom'>{meme.bottomText}</h2>
             </div>
